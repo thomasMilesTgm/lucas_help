@@ -1,3 +1,0 @@
-/home/tmiles/Code/knowledge_tech/lucas/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/tmiles/Code/knowledge_tech/lucas/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/tmiles/Code/knowledge_tech/lucas/cmake-build-debug/CMakeFiles/lucas.dir
