@@ -12,15 +12,11 @@
 #define BST_POSTORDER 2
 #define INTSIZEOFARRAY 50
 #define STRING_BUFFER 200
-
+#define TRUE 1
 
 
 
 /*    Struct Definitions      */
-
-
-
-
 
 
 // keysearchlist
@@ -51,35 +47,18 @@ typedef struct {
 } athletes_d;
 
 
-// Characterizing the key to the athlete
-//typedef struct{
-//    char* key;
-//    athletes_d ad;
-//
-//} key_val;
-
-/* node structure */
-typedef struct node node_k;
-
 struct node {
     char* key;
     athletes_d ad;
-//    key_val* key_n;
-    node_k* left;
-    node_k* right;
+    struct node* parent;
+    struct node* left;
+    struct node* right;
 };
-/* bst type */
-typedef struct {
-    int num_elements;
-    node_k* root;
-    int (*cmp)(char*, char*);
-} bst_key;
+
 
 
 /*     FUNCTION DECLARATIONS     */
 char * create_buffer (int buffer_size);
-
-bst_key* bst_new(int (*cmpfunc)(char*,char*));
 
 athletes_d new_athletes_d(int i,char* sex,int age, char* h, char* w, char* tm, char* nat,char*
         , int y, char* season, char* c, char* sp, char* e, char* m);
@@ -88,16 +67,14 @@ void add_key (key_s* k, char* value);
 
 key_s* new_key_s();
 
-//key_val* new_key_val(athletes_d ath, char* key);
-
-int bst_insert(bst_key* bst, athletes_d new_ath);
+int bst_insert(struct node* root, athletes_d new_ath);
 
 int namecompare(char* a, char* b);
 
 athletes_d parse_line(char* line);
 
-bst_key* readdatafile (const char* filename);
+struct node* readdatafile (const char* filename);
 
 void writing_to_file(const char* outputfile, char* message);
 
-void bst_search(bst_key* tree,char* key, const char* outputfile);
+void bst_search(struct node* root, char* key, const char* outputfile);

@@ -10,18 +10,30 @@ int main(int argc, const char** argv) {
     }else{
         printf("%s, %s , %s .. \n",argv[0],argv[1],argv[2]);
     }
-//    const char* filename = ;
-//    const char* outputfile = ;
+
     // Create Tree from datafile
-    bst_key* tree = readdatafile(argv[1]);
+    struct node* root = readdatafile(argv[1]);
 
+    char* key = "b";
+
+    bst_search(root,key,argv[2]);
+
+
+
+
+
+
+
+    //bst_key* tree =
     // read the keyfile
-    char key[128];
-
-    while(fgets(key, sizeof(key), stdin)!=NULL){
-        bst_search(tree,key,argv[2]);
-
-    }
-
+//    char key[128];
+//
+//    while(fgets(key, sizeof(key), stdin)!=NULL){
+//
+//        printf("Searching for %s\n", key);
+//        //bst_search(tree,key,argv[2]);
+//
+//    }
+    return 0;
 
 }
