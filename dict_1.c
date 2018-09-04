@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "assignment.c"
+#include "bst_1.c"
 
 int main(int argc, const char** argv) {
 

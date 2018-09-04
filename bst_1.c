@@ -1,4 +1,4 @@
-#include "assignment.h"
+#include "bst_1.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -31,6 +31,11 @@ void add_key (key_s* k, char* value){
 
 int bst_insert(struct node* root, athletes_d * new_ath)
 {
+    /**
+     * This inserts a new athlete into the tree
+     * @param root: the root of the tree
+     *
+     */
     struct node* tmp = root;
     char* key = new_ath->name;
 
@@ -84,7 +89,7 @@ athletes_d* safe_malloc() {
         exit(EXIT_FAILURE);
     }
 
-    an_athlete->i  = malloc(sizeof(int));
+    an_athlete->i  = malloc(sizeof(int));   //TODO
     an_athlete->y  = malloc(sizeof(int));
     an_athlete->age= malloc(sizeof(int));
 
@@ -179,13 +184,16 @@ athletes_d* parse_line(char* line) {
     athletes_d* an_athlete = safe_malloc();
 
 //    int i = 0;
-    an_athlete->i =  atoi(strtok(line, ","));
-//    printf("%d",i); i++;
+
+    an_athlete->i =  atoi(strtok(line, ","));       //TODO
+
     strcpy(an_athlete->name,  strtok(NULL, ","));
+
+
 //    printf("%d\n",i); i++;
     strcpy(an_athlete->sex,  strtok(NULL, ","));
 //    printf("%d\n",i); i++;
-    an_athlete->age =  atoi(strtok(NULL, ","));
+    an_athlete->age =  atoi(strtok(NULL, ","));     //TODO
 //    printf("%d\n",i); i++;
     strcpy(an_athlete->h,  strtok(NULL, ","));
 //    printf("%d\n",i); i++;
@@ -197,7 +205,7 @@ athletes_d* parse_line(char* line) {
 //    printf("%d\n",i); i++;
     strcpy(an_athlete->g,  strtok(NULL, ","));
 //    printf("%d\n",i); i++;
-    an_athlete->y =  atoi(strtok(NULL, ","));
+    an_athlete->y =  atoi(strtok(NULL, ","));       //TODO
 //    printf("%d\n",i); i++;
     strcpy(an_athlete->season, strtok(NULL, ","));
 //    printf("%d\n",i); i++;
