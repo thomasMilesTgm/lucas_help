@@ -13,12 +13,15 @@ int main(int argc, const char** argv) {
 
     // Create Tree from datafile
     struct node* root = readdatafile(argv[1]);
+//
+//    char* key = "guus";
+//
+//    bst_search(root,key,argv[2]);
+    char key[128];
+    while(fgets(key, sizeof(key), stdin)!=NULL){
+        bst_search(root,key,argv[2]);
 
-    char* key = "b";
-
-    bst_search(root,key,argv[2]);
-
-
+    }
 
 
 

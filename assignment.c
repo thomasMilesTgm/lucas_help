@@ -29,15 +29,15 @@ void add_key (key_s* k, char* value){
 }
 
 
-int bst_insert(struct node* root, athletes_d new_ath)
+int bst_insert(struct node* root, athletes_d * new_ath)
 {
     struct node* tmp = root;
-    char* key = new_ath.name;
+    char* key = new_ath->name;
 
-    printf("inserting %s... \n", new_ath.name);
+    printf("inserting %s... \n", new_ath->name);
 
     struct node* new_node = malloc(sizeof(struct node));
-    new_node->key = new_ath.name;
+    new_node->key = new_ath->name;
     new_node->ad = new_ath;
     new_node->parent = NULL;
     new_node->left = NULL;
@@ -74,58 +74,144 @@ int bst_insert(struct node* root, athletes_d new_ath)
 }
 
 
-athletes_d parse_line(char* line)
+athletes_d* safe_malloc() {
+    //printf("safe malloc\n");
 
-{
+    athletes_d * an_athlete = malloc(sizeof(an_athlete));
 
-    athletes_d an_athlete;
+    if (an_athlete == NULL) {
+        printf("MALLOC ERROR - an_athlete\n");
+        exit(EXIT_FAILURE);
+    }
 
-    an_athlete.i =  atoi(strtok(line, ","));
+    an_athlete->i  = malloc(sizeof(int));
+    an_athlete->y  = malloc(sizeof(int));
+    an_athlete->age= malloc(sizeof(int));
 
-    an_athlete.name =  strtok(NULL, ",");
+    an_athlete->name = (char*) malloc(sizeof(MAX_THING));
+    if (an_athlete->name == NULL) {
+        printf("MALLOC ERROR - an_athlete->name\n");
+        exit(EXIT_FAILURE);
+    }
+    an_athlete->sex = (char*) malloc(sizeof(MAX_THING));
+    if (an_athlete->sex == NULL) {
+        printf("MALLOC ERROR - an_athlete->sex\n");
+        exit(EXIT_FAILURE);
+    }
+    an_athlete->h = (char*) malloc(sizeof(MAX_THING));
+    if (an_athlete->h == NULL) {
+        printf("MALLOC ERROR - an_athlete->h\n");
+        exit(EXIT_FAILURE);
+    }
+    an_athlete->w = (char*) malloc(sizeof(MAX_THING));
+    if (an_athlete->w == NULL) {
+        printf("MALLOC ERROR - an_athlete->w\n");
+        exit(EXIT_FAILURE);
+    }
+    an_athlete->tm = (char*) malloc(sizeof(MAX_THING));
+    if (an_athlete->tm == NULL) {
+        printf("MALLOC ERROR - an_athlete->tm\n");
+        exit(EXIT_FAILURE);
+    }
+    an_athlete->nat = (char*) malloc(sizeof(MAX_THING));
+    if (an_athlete->nat == NULL) {
+        printf("MALLOC ERROR - an_athlete->nat\n");
+        exit(EXIT_FAILURE);
+    }
+    an_athlete->g = (char*)malloc(sizeof(MAX_THING));
+    if (an_athlete->g == NULL) {
+        printf("MALLOC ERROR - an_athlete->g\n");
+        exit(EXIT_FAILURE);
+    }
 
-    an_athlete.sex =  strtok(NULL, ",");
+    an_athlete->season = (char*) malloc(sizeof(MAX_THING));
+    if (an_athlete->season == NULL) {
+        printf("MALLOC ERROR - an_athlete->season\n");
+        exit(EXIT_FAILURE);
+    }
+    an_athlete->c = (char*) malloc(sizeof(MAX_THING));
+    if (an_athlete->c == NULL) {
+        printf("MALLOC ERROR - an_athlete->c\n");
+        exit(EXIT_FAILURE);
+    }
+    an_athlete->sp = (char*) malloc(sizeof(MAX_THING));
+    if (an_athlete->sp == NULL) {
+        printf("MALLOC ERROR - an_athlete->sp\n");
+        exit(EXIT_FAILURE);
+    }
+    an_athlete->e = (char*) malloc(sizeof(MAX_THING));
+    if (an_athlete->e == NULL) {
+        printf("MALLOC ERROR - an_athlete->e\n");
+        exit(EXIT_FAILURE);
+    }
+    an_athlete->m = (char*)malloc(sizeof(MAX_THING));
+    if (an_athlete->m == NULL) {
+        printf("MALLOC ERROR - an_athlete->m\n");
+        exit(EXIT_FAILURE);
+    }
+    return an_athlete;
+}
 
-    an_athlete.age =  atoi(strtok(NULL, ","));
 
-    an_athlete.h =  strtok(NULL, ",");
+void print_ath(athletes_d* an_athlete){
+    printf("i %d\n", an_athlete->i);
+    printf("name %s\n", an_athlete->name);
+    printf("sex %s\n", an_athlete->sex);
+    printf("age %d\n", an_athlete->age);
+    //printf("h %s\n", an_athlete->h);
+    printf("w %s\n", an_athlete->w);
+    printf("tm %s\n", an_athlete->tm);
+    printf("nat %s\n", an_athlete->nat);
+    printf("g %s\n", an_athlete->g);
+    printf("y %d\n", an_athlete->y);
+    printf("season %s\n", an_athlete->season);
+    printf("c %s\n", an_athlete->c);
+    printf("sp %s\n", an_athlete->sp);
+    printf("e %s\n", an_athlete->e);
+    printf("m %s\n", an_athlete->m);
+}
 
-    an_athlete.w =  strtok(NULL, ",");
 
-    an_athlete.tm =  strtok(NULL, ",");
 
-    an_athlete.nat =  strtok(NULL, ",");
+athletes_d* parse_line(char* line) {
+//printf("parsing\n");
 
-    an_athlete.g =  strtok(NULL, ",");
+    athletes_d* an_athlete = safe_malloc();
 
-    an_athlete.y =  atoi(strtok(NULL, ","));
+//    int i = 0;
+    an_athlete->i =  atoi(strtok(line, ","));
+//    printf("%d",i); i++;
+    strcpy(an_athlete->name,  strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    strcpy(an_athlete->sex,  strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    an_athlete->age =  atoi(strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    strcpy(an_athlete->h,  strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    strcpy(an_athlete->w,  strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    strcpy(an_athlete->tm,  strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    strcpy(an_athlete->nat,  strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    strcpy(an_athlete->g,  strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    an_athlete->y =  atoi(strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    strcpy(an_athlete->season, strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    strcpy(an_athlete->c, strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    strcpy(an_athlete->sp, strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    strcpy(an_athlete->e, strtok(NULL, ","));
+//    printf("%d\n",i); i++;
+    strcpy(an_athlete->m, strtok(NULL, ","));
+  //  printf("%d\n",i); i++;
+  //  printf("got to the end\n");
 
-    an_athlete.season =  strtok(NULL, ",");
-
-    an_athlete.c =  strtok(NULL, ",");
-
-    an_athlete.sp =  strtok(NULL, ",");
-
-    an_athlete.e =  strtok(NULL, ",");
-
-    an_athlete.m =  strtok(NULL, ",");
-
-//    printf("i %d\n", an_athlete.i);
-//    printf("name %s\n", an_athlete.name);
-//    printf("sex %s\n", an_athlete.sex);
-//    printf("age %d\n", an_athlete.age);
-//    printf("h %s\n", an_athlete.h);
-//    printf("w %s\n", an_athlete.w);
-//    printf("tm %s\n", an_athlete.tm);
-//    printf("nat %s\n", an_athlete.nat);
-//    printf("g %s\n", an_athlete.g);
-//    printf("y %d\n", an_athlete.y);
-//    printf("season %s\n", an_athlete.season);
-//    printf("c %s\n", an_athlete.c);
-//    printf("sp %s\n", an_athlete.sp);
-//    printf("e %s\n", an_athlete.e);
-//    printf("m %s\n", an_athlete.m);
-
+   // print_ath(an_athlete);
     return an_athlete;
 }
 char * create_buffer (int buffer_size) {
@@ -161,7 +247,7 @@ struct node* readdatafile (const char* filename){
 
     buffer = create_buffer(MAX_LEN);
 
-    athletes_d new_ath;
+    athletes_d* new_ath;
     struct node* root = NULL;        // NULL so root is assigned in first iteration
 
     while (fgets (buffer, MAX_LEN, fp)) {
@@ -174,13 +260,14 @@ struct node* readdatafile (const char* filename){
             root = malloc(sizeof(struct node));
             // TODO safe malloc
             root->ad = new_ath;
-            root->key = new_ath.name;
+            root->key = new_ath->name;
             root->left = NULL;
             root->right = NULL;
             root->parent = NULL;
-
+           // printf("root: %s",root->key);
         // Otherwise add new node to the tree
         } else {
+           // printf("root: %s",root->key);
             bst_insert(root, new_ath);
         }
     }
@@ -191,7 +278,7 @@ struct node* readdatafile (const char* filename){
 }
 
 void writing_to_file(const char* outputfile, char* message) {
-    
+    printf("writing output\n");
     FILE* fp ;
     fp = fopen(outputfile,"a");
     
@@ -221,16 +308,16 @@ void bst_search(struct node* root, char* key, const char* outputfile){
 
         printf("searching for %s\n", key);
         printf("tmp->key: %s\n", tmp->key);
-        printf("comp: %d\n",strcasecmp(tmp->key, key));
+        printf("comp: %d\n",strcasecmp(tmp->key,key));
 
         if (strcasecmp(tmp->key, key) == 0) {
             // Found it, write to file and return
-            athletes_d d = tmp->ad;
+            athletes_d * d = tmp->ad;
 
             char* message = (char*)malloc(STRING_BUFFER* sizeof(char));
             sprintf(message, "%s --> ID: %d Sex: %s || Age: %d || Height: %s || Weight: %s || Team: %s || NOC: %s"
-                            " ||Games: %s ||Year: %d || Season: %s || City: %s || Sport: %s || Event: %s || Medal: %s ||",
-                    key, d.i,d.sex,d.age,d.h,d.w,d.tm,d.nat,d.g,d.y,d.season,d.c,d.sp,d.e,d.m );
+                            " ||Games: %s ||Year: %d || Season: %s || City: %s || Sport: %s || Event: %s || Medal: %s ||\n",
+                    key, d->i,d->sex,d->age,d->h,d->w,d->tm,d->nat,d->g,d->y,d->season,d->c,d->sp,d->e,d->m );
             writing_to_file(outputfile, message);
             free(message);
             break;
@@ -241,7 +328,7 @@ void bst_search(struct node* root, char* key, const char* outputfile){
                 count++;
 
                 char* message = (char*)malloc(STRING_BUFFER* sizeof(char));
-                sprintf(message, "%s --> NOTFOUND ", key);
+                sprintf(message, "%s --> NOTFOUND \n", key);
                 writing_to_file(outputfile, message);
                 free(message);
                 break;
@@ -256,14 +343,17 @@ void bst_search(struct node* root, char* key, const char* outputfile){
             // Not found, reached leaf node, write to file and return
             if (tmp->right == NULL) {
                 char* message = (char*)malloc(STRING_BUFFER* sizeof(char));
-                sprintf(message, "%s --> NOTFOUND ", key);
+
+                sprintf(message, "%s --> NOTFOUND \n", key);
                 writing_to_file(outputfile, message);
                 free(message);
-
+                break;
                 // Not found, keep looking
             } else {
+                printf("tmp->left is now tmp\n");
                 count++;
-                tmp = tmp->left;
+                tmp = tmp->right;
+                //printf("new key to comp is : %s\n",tmp->right->key);
             }
         }
     }

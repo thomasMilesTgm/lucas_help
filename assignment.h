@@ -11,7 +11,8 @@
 #define BST_INORDER 1
 #define BST_POSTORDER 2
 #define INTSIZEOFARRAY 50
-#define STRING_BUFFER 200
+#define STRING_BUFFER 1024
+#define MAX_THING 128 //TODO thing of a good name
 #define TRUE 1
 
 
@@ -27,7 +28,7 @@ typedef struct {
 } key_s ;
 
 // Making the array for athletes information
-typedef struct {
+typedef struct athletes_d {
 //TODO refactor naming
     int i;
     char* name;
@@ -49,11 +50,11 @@ typedef struct {
 
 struct node {
     char* key;
-    athletes_d ad;
+    athletes_d *ad;
     struct node* parent;
     struct node* left;
     struct node* right;
-};
+} node;
 
 
 
@@ -67,11 +68,11 @@ void add_key (key_s* k, char* value);
 
 key_s* new_key_s();
 
-int bst_insert(struct node* root, athletes_d new_ath);
+int bst_insert(struct node* root, athletes_d* new_ath);
 
 int namecompare(char* a, char* b);
 
-athletes_d parse_line(char* line);
+struct athletes_d* parse_line(char* line);
 
 struct node* readdatafile (const char* filename);
 
